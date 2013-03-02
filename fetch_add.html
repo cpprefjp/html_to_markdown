@@ -1,0 +1,43 @@
+<table class='sites-layout-name-one-column sites-layout-hbox' cellspacing='0'><tbody><tr><td class='sites-layout-tile sites-tile-name-content-1'><div dir='ltr'><div class='sites-codeblock sites-codesnippet-block'>
+<div><font face='monospace' color='#000000'>
+<div><div>T fetch_add(T operand, <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order</a> order = <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order_seq_cst</a>) volatile noexcept;</div><div>T fetch_add(T operand, <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order</a> order = <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order_seq_cst</a>) noexcept;</div>
+</div>
+</font></div>
+</div>
+<h2><a name='TOC--'/>概要</h2>
+<div><b>加算を行う</b></div>
+<h2><a name='TOC--1'/>効果</h2>
+<div><code><font color='#000000'>order</font></code>で指定されたメモリオーダーにしたがって、現在の値に<code><font color='#000000'>operandを加算した値</font></code>でアトミックに置き換える
+
+</div>
+<h2><a name='TOC--2'/>戻り値</h2>
+<div>変更前の値が返される
+
+</div>
+<h2><a name='TOC--3'/>例外</h2>
+<div>投げない
+</div>
+<h2><a name='TOC--4'/>備考</h2>
+<div>この関数は、<code><font color='#000000'>atomic</font></code>クラスの整数型およびポインタに対する特殊化で定義される。
+</div><div><br/></div><div>符号付き整数型に対しては、2の補数表現による演算が行われ、未定義動作はない。アドレス型に関しては結果として未定義アドレスになる場合があるが、それ以外の未定義動作はない。</div>
+<h2><a name='TOC--5'/>例</h2>
+<div class='sites-codeblock sites-codesnippet-block'>
+<div><font face='monospace'><div style='color:rgb(0,0,0)'>#include &lt;iostream&gt;</div><div style='color:rgb(0,0,0)'>#include &lt;atomic&gt;</div><div style='color:rgb(0,0,0)'><br/></div><div style='color:rgb(0,0,0)'>int main()</div><div style='color:rgb(0,0,0)'>{</div><div style='color:rgb(0,0,0)'>  std::atomic&lt;int&gt; x(3);</div><div style='color:rgb(0,0,0)'><br/></div><div><font color='#000000'>  int before = x.</font><font color='#ff0000'>fetch_add</font><font color='#000000'>(2);</font></div><div style='color:rgb(0,0,0)'><br/></div><div style='color:rgb(0,0,0)'>  std::cout &lt;&lt; before &lt;&lt; std::endl;</div><div style='color:rgb(0,0,0)'>  std::cout &lt;&lt; x.load() &lt;&lt; std::endl;</div><div style='color:rgb(0,0,0)'>}</div>
+</font></div>
+</div>
+<h3><a name='TOC--6'/>出力</h3>
+<div class='sites-codeblock sites-codesnippet-block'>
+<div><font face='monospace' color='#000000'>3
+</font></div><div><font face='monospace' color='#000000'>5</font></div>
+</div>
+<h2><a name='TOC--7'/>バージョン</h2>
+<h3><a name='TOC--8'/>言語</h3>
+<div>
+<ul><li>C++11</li></ul>
+</div>
+<div>
+<h3><a name='TOC--9'/>処理系</h3><div><ul><li><a href='https://sites.google.com/site/cpprefjp/implementation#clang'>Clang</a>: ??</li><li><a href='https://sites.google.com/site/cpprefjp/implementation#gcc'>GCC</a>: </li><li><a href='https://sites.google.com/site/cpprefjp/implementation#gcc'>GCC, C++0x mode</a>: 4.7.0</li><li><a href='https://sites.google.com/site/cpprefjp/implementation#icc'>ICC</a>: ??</li><li><a href='https://sites.google.com/site/cpprefjp/implementation#visual_cpp'>Visual C++</a> ??</li></ul></div>
+</div>
+<h2><a name='TOC--10'/>参照</h2>
+<div><br/>
+</div></div></td></tr></tbody></table>

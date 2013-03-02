@@ -1,0 +1,38 @@
+<table class='sites-layout-name-one-column sites-layout-hbox' cellspacing='0'><tbody><tr><td class='sites-layout-tile sites-tile-name-content-1'><div dir='ltr'><div class='sites-codeblock sites-codesnippet-block'>
+<div><font face='monospace' color='#000000'>
+<div><div>namespace std {</div><div>  template &lt;class InputIterator, class Distance&gt;</div><div>  void advance(InputIterator&amp; i, Distance n);</div><div>}</div>
+</div>
+</font></div>
+</div>
+<h2><a name='TOC--'/>概要</h2>
+<div><b>イテレータをn回進める。</b></div>
+<h2><a name='TOC--1'/>要件</h2>
+<div>双方向イテレータもしくはランダムアクセスイテレータの場合のみ、nが負数であることを許可する。
+</div>
+<h2><a name='TOC--2'/>効果</h2>
+<div>イテレータへの参照iをn回進める(nが負数の場合は逆方向に進める)。
+</div>
+<h2><a name='TOC--3'/>戻り値</h2>
+<div>なし
+</div>
+<h2><a name='TOC--4'/>計算量</h2>
+<div>規格上の規定はないが、多くの実装では以下のようになっている。
+</div><div>入力イテレータ、前方向イテレータ ： n回のインクリメント</div><div>双方向イテレータ： n回のインクリメント、もしくはデクリメント</div><div>ランダムアクセスイテレータ： O(1)</div>
+<h2><a name='TOC--5'/>例</h2>
+<div class='sites-codeblock sites-codesnippet-block'>
+<div><font face='monospace'><div style='color:rgb(0,0,0)'>#include &lt;iostream&gt;</div><div style='color:rgb(0,0,0)'>#include &lt;iterator&gt;</div><div style='color:rgb(0,0,0)'>#include &lt;vector&gt;</div><div style='color:rgb(0,0,0)'><br/></div><div style='color:rgb(0,0,0)'>int main()</div><div style='color:rgb(0,0,0)'>{</div><div style='color:rgb(0,0,0)'>  std::vector&lt;int&gt; v = {3, 1, 4, 2, 5};</div><div style='color:rgb(0,0,0)'><br/></div><div style='color:rgb(0,0,0)'>  decltype(v)::iterator i = v.begin();</div><div><font color='#000000'>  std::</font><font color='#ff0000'>advance</font><font color='#000000'>(i, 3); // イテレータiを3回進める</font></div><div style='color:rgb(0,0,0)'><br/></div><div style='color:rgb(0,0,0)'>  std::cout &lt;&lt; *i &lt;&lt; std::endl;</div><div style='color:rgb(0,0,0)'>}</div>
+</font></div>
+</div>
+<h3><a name='TOC--6'/>出力</h3>
+<div class='sites-codeblock sites-codesnippet-block'>
+<div><font face='monospace' color='#000000'>2</font></div></div><div><div>
+</div>
+<h2><a name='TOC--7'/>実装例</h2>
+<div class='sites-codeblock sites-codesnippet-block'>
+<div><font face='monospace' color='#000000'><div>// 入力イテレータ(or 前方向イテレータ)</div><div>template &lt;class InputIterator, class Distance&gt;</div><div>void advance_impl(InputIterator&amp; i, Distance n, std::input_iterator_tag)</div><div>{</div><div><div>  assert(n &gt;= 0);</div></div><div>  for (; 0 &lt; n; --n) { ++i; }</div><div>}</div><div><br/></div><div>// 双方向イテレータ</div><div>template &lt;class BidirectionalIterator, class Distance&gt;</div><div>void advance_impl(BidirectionalIterator&amp; i, Distance n, std::bidirectional_iterator_tag)</div><div>{</div><div>  if (n &gt; 0) {</div><div>    for (; 0 &lt; n; --n) { ++i; }</div><div>  }</div><div>  else {</div><div>    for (; n &lt; 0; ++n) { --i; }</div><div>  }</div><div>}</div><div><br/></div><div>// ランダムアクセスイテレータ</div><div>template &lt;class RandomAccessIterator, class Distance&gt;</div><div>void advance_impl(RandomAccessIterator&amp; i, Distance n, std::random_access_iterator_tag)</div><div>{</div><div>  i += n;</div><div>}</div><div><br/></div><div>template &lt;class Iterator, class Distance&gt;</div><div>void advance(Iterator&amp; i, Distance n)</div><div>{</div><div>  advance_impl(i, n,</div><div>          typename std::iterator_traits&lt;Iterator&gt;::iterator_category());</div><div>          // イテレータのカテゴリごとに最適な実装を選択させる</div><div>}</div>
+</font></div>
+</div>
+</div>
+<h2><a name='TOC--8'/>参照</h2>
+<div><br/>
+</div></div></td></tr></tbody></table>
