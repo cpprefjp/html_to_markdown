@@ -1,6 +1,6 @@
 <codeblock>
-T fetch_add(T operand, <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order</a> order = <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order_seq_cst</a>) volatile noexcept;
-T fetch_add(T operand, <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order</a> order = <a href='https://sites.google.com/site/cpprefjp/reference/atomic/memory_order'>memory_order_seq_cst</a>) noexcept;
+T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) volatile noexcept;
+T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) noexcept;
 </codeblock>
 ##概要
 <b>加算を行う</b>
@@ -54,11 +54,11 @@ int main()
 
 
 ###処理系
-- <a href='https://sites.google.com/site/cpprefjp/implementation#clang'>Clang</a>: ??
-- <a href='https://sites.google.com/site/cpprefjp/implementation#gcc'>GCC</a>: 
-- <a href='https://sites.google.com/site/cpprefjp/implementation#gcc'>GCC, C++0x mode</a>: 4.7.0
-- <a href='https://sites.google.com/site/cpprefjp/implementation#icc'>ICC</a>: ??
-- <a href='https://sites.google.com/site/cpprefjp/implementation#visual_cpp'>Visual C++</a> ??
+- [Clang](https://sites.google.com/site/cpprefjp/implementation#clang): ??
+- [GCC](https://sites.google.com/site/cpprefjp/implementation#gcc): 
+- [GCC, C++0x mode](https://sites.google.com/site/cpprefjp/implementation#gcc): 4.7.0
+- [ICC](https://sites.google.com/site/cpprefjp/implementation#icc): ??
+- [Visual C++](https://sites.google.com/site/cpprefjp/implementation#visual_cpp) ??
 
 
 
