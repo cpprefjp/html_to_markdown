@@ -57,7 +57,7 @@ def htmlToMarkdown(html_path)
   # 最終行を削除
   html = html.gsub("\n</td></tr></tbody></table>", "")
 
-  File.open("#{filename}.txt", "w") {|f|
+  File.open("#{filename}.md", "w") {|f|
     f.write(html)
   }
 
