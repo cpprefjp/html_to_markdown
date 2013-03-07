@@ -71,6 +71,9 @@ def htmlToMarkdown(html_path)
   # 連続する改行を削除
   html = html.gsub(/^\n\n/, "\n")
 
+  # スペースのような何かをスペースに置き換え
+  html = html.gsub(' ', ' ')
+
   File.open("#{filename}.md", "w") {|f|
     f.write(html)
   }
@@ -80,4 +83,5 @@ end
 
 htmlToMarkdown('advance.html')
 htmlToMarkdown('fetch_add.html')
+htmlToMarkdown('atomic.html')
 

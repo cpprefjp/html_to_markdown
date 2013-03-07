@@ -28,12 +28,12 @@ T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/ref
 
 int main()
 {
-  std::atomic<int> x(3);
+  std::atomic<int> x(3);
 
-  int before = x.<color=000000>fetch_add</color>(2);
+  int before = x.<color=000000>fetch_add</color>(2);
 
-  std::cout << before << std::endl;
-  std::cout << x.load() << std::endl;
+  std::cout << before << std::endl;
+  std::cout << x.load() << std::endl;
 }
 ```
 ###出力
@@ -49,7 +49,7 @@ int main()
 
 ###処理系
 - [Clang](https://sites.google.com/site/cpprefjp/implementation#clang): ??
-- [GCC](https://sites.google.com/site/cpprefjp/implementation#gcc): 
+- [GCC](https://sites.google.com/site/cpprefjp/implementation#gcc): 
 - [GCC, C++0x mode](https://sites.google.com/site/cpprefjp/implementation#gcc): 4.7.0
 - [ICC](https://sites.google.com/site/cpprefjp/implementation#icc): ??
 - [Visual C++](https://sites.google.com/site/cpprefjp/implementation#visual_cpp) ??
