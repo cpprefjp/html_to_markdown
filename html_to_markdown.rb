@@ -54,8 +54,17 @@ def htmlToMarkdown(html_path)
   # コードブロックの終了
   html = html.gsub(/<codeblock>(.*?\n)\n+(?=\n)/m, "<codeblock>\\1</codeblock>")
 
+  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
+	  codeblock = codeblock.gsub(/<codeblock>\n/m, "")
+	  codeblock = codeblock.gsub(/\n<\/codeblock>/m, "")
+	  codeblock.gsub(/^/, '    \1')
+  }
+
   # 最終行を削除
   html = html.gsub("\n</td></tr></tbody></table>", "")
+
+  # 連続する改行を削除
+  html = html.gsub(/^\n\n/, "\n")
 
   File.open("#{filename}.md", "w") {|f|
     f.write(html)
