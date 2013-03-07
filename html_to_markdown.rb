@@ -54,11 +54,16 @@ def htmlToMarkdown(html_path)
   # コードブロックの終了
   html = html.gsub(/<codeblock>(.*?\n)\n+(?=\n)/m, "<codeblock>\\1</codeblock>")
 
-  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
-	  codeblock = codeblock.gsub(/<codeblock>\n/m, "")
-	  codeblock = codeblock.gsub(/\n<\/codeblock>/m, "")
-	  codeblock.gsub(/^/, '    \1')
-  }
+  # インデントによるコードブロック
+#  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
+#	  codeblock = codeblock.gsub(/<codeblock>\n/m, "")
+#	  codeblock = codeblock.gsub(/\n<\/codeblock>/m, "")
+#	  codeblock.gsub(/^/, '    \1')
+#  }
+
+  # バッククォートでコードブロック
+  html = html.gsub(/<codeblock>/, '```cpp')
+  html = html.gsub(/<\/codeblock>/, '```')
 
   # 最終行を削除
   html = html.gsub("\n</td></tr></tbody></table>", "")

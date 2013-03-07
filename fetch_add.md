@@ -1,5 +1,7 @@
-    T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) volatile noexcept;
-    T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) noexcept;
+```cpp
+T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) volatile noexcept;
+T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) noexcept;
+```
 ##概要
 <b>加算を行う</b>
 
@@ -20,21 +22,25 @@
 符号付き整数型に対しては、2の補数表現による演算が行われ、未定義動作はない。アドレス型に関しては結果として未定義アドレスになる場合があるが、それ以外の未定義動作はない。
 
 ##例
-    #include <iostream>
-    #include <atomic>
-    
-    int main()
-    {
-      std::atomic<int> x(3);
-    
-      int before = x.<color=000000>fetch_add</color>(2);
-    
-      std::cout << before << std::endl;
-      std::cout << x.load() << std::endl;
-    }
+```cpp
+#include <iostream>
+#include <atomic>
+
+int main()
+{
+  std::atomic<int> x(3);
+
+  int before = x.<color=000000>fetch_add</color>(2);
+
+  std::cout << before << std::endl;
+  std::cout << x.load() << std::endl;
+}
+```
 ###出力
-    3
-    5
+```cpp
+3
+5
+```
 ##バージョン
 ###言語
 
