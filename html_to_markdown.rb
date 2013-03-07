@@ -33,6 +33,15 @@ def htmlToMarkdown(html_path)
   html = html.gsub(/<font color=\'#000000\'>(.*?)<\/font>/, '\1') # 意味がないので無視
   html = html.gsub('</font>', '') # 消し残し
 
+  # 見出し
+  html = html.gsub(/<h2>(.*?)<\/h2>/, '##\1')
+  html = html.gsub(/<h3>(.*?)<\/h3>/, '###\1')
+
+  # 箇条書き
+  html = html.gsub(/<li>(.*?)<\/li>/, "\n- \\1")
+  html = html.gsub("<ul>", "")
+  html = html.gsub("<\/ul>", "")
+
   # コードブロックの開始
   html = html.gsub('<div class=\'sites-codeblock sites-codesnippet-block\'>', '<codeblock>')
 
@@ -40,8 +49,6 @@ def htmlToMarkdown(html_path)
   html = html.gsub(/<codeblock>\n*/, "<codeblock>\n")
 
   # コードブロックの終了
-  #html = html.gsub(/<codeblock>((\n|.)*?\n{3,})?/m, "<codeblock>\\1</codeblock>\n")
-  #html = html.gsub(/^\n{3,}<\/codeblock>/m, "</codeblock>")
   html = html.gsub(/<codeblock>(.*?\n)\n+(?=\n)/m, "<codeblock>\\1</codeblock>")
 
   # 最終行を削除
