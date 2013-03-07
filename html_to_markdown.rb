@@ -39,8 +39,8 @@ def htmlToMarkdown(html_path)
 
   # 箇条書き
   html = html.gsub(/<li>(.*?)<\/li>/, "\n- \\1")
-  html = html.gsub("<ul>", "")
-  html = html.gsub("<\/ul>", "")
+  html = html.gsub('<ul>', "")
+  html = html.gsub('</ul>', "")
 
   # コードブロックの開始
   html = html.gsub('<div class=\'sites-codeblock sites-codesnippet-block\'>', '<codeblock>')
