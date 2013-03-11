@@ -95,22 +95,22 @@ end
 #     int value = 0;
 # }
 # ```
-# value<color ff0000>
+# value[color ff0000]
 #
 # 記述ルール：
 # コードブロック終了直後の行から空行までを、直前のコードブロックへの修飾とする。
 #
 # 構文：
-# name<attribute-name attribute-value(opt)>
+# name[attribute-name attribute-value(opt)]
 #
 # name : 修飾対象の名前。コードブロック内の特定文字列
 # attribute-name : 属性名。リンク、文字色、書体等。
 # attribute-value : 属性値。それぞれの属性に応じた値を入力する
 #
 # 定義可能な文字修飾：
-# name<link http://...> : リンク修飾。nameに対して、属性値となるURLへのリンクを貼る
-# name<color ff0000> ： 文字色修飾。nameに対して、属性値で指定された色を付ける。RGBの順に16進数2桁で指定する。
-# name<italic> : 文字を斜体にする。
+# name[link http://...] : リンク修飾。nameに対して、属性値となるURLへのリンクを貼る
+# name[color ff0000] ： 文字色修飾。nameに対して、属性値で指定された色を付ける。RGBの順に16進数2桁で指定する。
+# name[italic] : 文字を斜体にする。
 def codeBlockQualify(html)
   html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {
     qualify_list = Array.new
@@ -133,15 +133,15 @@ def codeBlockQualify(html)
       qualify_str = qualify['name']
       
       if qualify['link']
-        qualify_str = qualify_str + '<link ' + qualify['link'] + '>'
+        qualify_str = qualify_str + '[link ' + qualify['link'] + ']'
       end
 
       if qualify['color']
-        qualify_str = qualify_str + '<color ' + qualify['color'] + '>'
+        qualify_str = qualify_str + '[color ' + qualify['color'] + ']'
       end
 
       if qualify['italic']
-         qualify_str = qualify_str + '<italic>'
+         qualify_str = qualify_str + '[italic]'
       end
       qualify_str = '* ' + qualify_str + "\n"
       codeblock = codeblock + qualify_str
