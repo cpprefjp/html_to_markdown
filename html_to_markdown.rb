@@ -12,8 +12,11 @@ def htmlToMarkdown(html_path)
   html = CGI.unescapeHTML(html)
 
   html = html.gsub('<table class=\'sites-layout-name-one-column sites-layout-hbox\' cellspacing=\'0\'><tbody><tr><td class=\'sites-layout-tile sites-tile-name-content-1\'><div dir=\'ltr\'>', "")
+  html = html.gsub('<table style=\'width:877px\' cellspacing=\'0\'><tbody><tr><td><div dir=\'ltr\'><div/>', "")
   html = html.gsub("<div>", "")
   html = html.gsub("</div>", "\n")
+
+  html = html.gsub(/<p>(.*?)<\/p>/, "\n\\1\n")
 
   # 意味がないので削除
   html = html.gsub(/<font face=\'monospace\' color=\'#000000\'>(.*?)<\/font>/, '\1')
