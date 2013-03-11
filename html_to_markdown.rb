@@ -144,13 +144,6 @@ def htmlToMarkdown(html_path)
   # コードブロックの終了
   html = html.gsub(/<codeblock>(.*?\n)\n+(?=\n)/m, "<codeblock>\\1</codeblock>")
 
-  # インデントによるコードブロック
-#  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
-#     codeblock = codeblock.gsub(/<codeblock>\n/m, "")
-#     codeblock = codeblock.gsub(/\n<\/codeblock>/m, "")
-#     codeblock.gsub(/^/, '    \1')
-#  }
-
   # コードブロック内のゴミ消し
   html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
     codeblock = codeblock.gsub('<code>', '').gsub('</code>', '')
