@@ -29,6 +29,7 @@ namespace std {
 |<code> atomic_wchar_t</code> |<code> wchar_t</code> |
 |<code> atomic_bool</code> |<code> bool</code> |
 また、<inttypes.h>で定義される整数型に対する以下の<code>typedef</code>も提供される。
+
 | | |
 |------------------------------------|--------------------------------------------|
 | 名前付きアトミック型 | テンプレート引数となる整数型 |

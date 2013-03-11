@@ -76,7 +76,7 @@ def parseTable(html)
 
     body = tr_list
 
-    result = "\n" + makeTableHead(col_width_list)
+    result = "\n\n" + makeTableHead(col_width_list)
     result = result + "\n" + makeTableBody(tr_list, col_width_list) + "\n"
 
     result
