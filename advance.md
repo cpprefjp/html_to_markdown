@@ -51,7 +51,7 @@ int main()
   std::cout << *i << std::endl;
 }
 ```
-advance<color ff0000>
+* advance<color ff0000>
 
 ###出力
 

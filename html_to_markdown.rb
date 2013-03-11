@@ -143,7 +143,7 @@ def codeBlockQualify(html)
       if qualify['italic']
          qualify_str = qualify_str + '<italic>'
       end
-      qualify_str = qualify_str + "\n"
+      qualify_str = '* ' + qualify_str + "\n"
       codeblock = codeblock + qualify_str
     }
     codeblock
