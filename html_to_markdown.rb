@@ -110,7 +110,7 @@ end
 # 定義可能な文字修飾：
 # name<link http://...> : リンク修飾。nameに対して、属性値となるURLへのリンクを貼る
 # name<color ff0000> ： 文字色修飾。nameに対して、属性値で指定された色を付ける。RGBの順に16進数2桁で指定する。
-# name[italic] : 文字を斜体にする。
+# name<italic> : 文字を斜体にする。
 def codeBlockQualify(html)
   html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {
     qualify_list = Array.new
