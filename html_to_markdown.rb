@@ -36,11 +36,11 @@ def getColumnWidthList(tr_list)
   return col_width_list
 end
 
-def makeTableHead(head, col_width_list)
+def makeTableHead(col_width_list)
   result = "|"
 
-  head.each {|data|
-    result = result + data + " |"
+  col_width_list.each {
+    result = result + " |"
   }
   result = result + "\n|"
 
@@ -74,12 +74,10 @@ def parseTable(html)
     tr_list = getTrList(table)
     col_width_list = getColumnWidthList(tr_list)
 
-    head = tr_list.first
-    body = tr_list[1, tr_list.size - 1]
+    body = tr_list
 
-    result = ""
-    result = makeTableHead(head, col_width_list)
-    result = result + "\n" + makeTableBody(body, col_width_list) + "\n"
+    result = "\n" + makeTableHead(col_width_list)
+    result = result + "\n" + makeTableBody(tr_list, col_width_list) + "\n"
 
     result
   }

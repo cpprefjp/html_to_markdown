@@ -10,8 +10,10 @@ namespace std {
 ##概要
 
 <code>atomic</code>クラスは、型<code>T</code>をアトミック操作するためのクラスである。整数型およびポインタに対する特殊化が提供されており、それぞれに特化した演算が用意されている。その他の型に<code>atomic</code>クラスを使用する場合、型<code>T</code>はtrivially copyable (TODO)である必要がある。特殊化された整数型および<code>bool</code>型にはそれぞれ<code>atomic_T</code>という名前の<code>typedef</code>が提供される。
-| 名前付きアトミック型 | テンプレート引数となる整数型 |
+
+| | |
 |--------------------------------|--------------------------------------------|
+| 名前付きアトミック型 | テンプレート引数となる整数型 |
 |<code> atomic_char</code> |<code> char</code> |
 |<code> atomic_schar</code> |<code> signed char</code> |
 |<code> atomic_uchar</code> |<code> unsigned char</code> |
@@ -26,8 +28,10 @@ namespace std {
 |<code> atomic_char32_t</code> |<code> char32_t</code> |
 |<code> atomic_wchar_t</code> |<code> wchar_t</code> |
 |<code> atomic_bool</code> |<code> bool</code> |
-また、<inttypes.h>で定義される整数型に対する以下の<code>typedef</code>も提供される。| 名前付きアトミック型 | テンプレート引数となる整数型 |
+また、<inttypes.h>で定義される整数型に対する以下の<code>typedef</code>も提供される。
+| | |
 |------------------------------------|--------------------------------------------|
+| 名前付きアトミック型 | テンプレート引数となる整数型 |
 |<code> atomic_int_least8_t</code> |<code> int_least8_t</code> |
 |<code> atomic_uint_least8_t</code> |<code> uint_least8_t</code> |
 |<code> atomic_int_least16_t</code> |<code> int_least16_t</code> |
@@ -53,8 +57,10 @@ namespace std {
 <code>void*</code>に対する特殊化の<code>typedef</code>として、<code>atomic_address</code>型が提供される。
 
 ###共通メンバ関数
-| <code>[(constructor)](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/atomic)</code> | コンストラクタ |
+
+| | |
 |-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| <code>[(constructor)](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/atomic)</code> | コンストラクタ |
 | <code>~atomic() = default</code> | デストラクタ |
 | <code>[operator=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_assign)</code> | 代入演算子 |
 | <code>[is_lock_free](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/is_lock_free)</code> | オブジェクトがロックフリーに振る舞えるかを判定する |
@@ -66,8 +72,10 @@ namespace std {
 | <code>[compare_exchange_strong](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_strong)</code> | 強い比較で値を入れ替える |
 
 ###atomic<integral>専用メンバ関数
-| <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
+
+| | |
 |----------------------------------------------------------------------------------------------------------------------|-----------------------|
+| <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
 | <code>[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)</code> | 減算 |
 | <code>[fetch_and](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_and)</code> | AND演算 |
 | <code>[fetch_or](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_or)</code> | OR演算 |
@@ -81,8 +89,10 @@ namespace std {
 | <code>[operator^=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_xor_assign)</code> | XOR演算 |
 
 ###atomic<T*>専用メンバ関数
-| <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
+
+| | |
 |----------------------------------------------------------------------------------------------------------------------|-----------------------|
+| <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
 | <code>[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)</code> | 減算 |
 | <code>[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)</code> | インクリメント |
 | <code>[operator--](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement)</code> | デクリメント |
