@@ -85,6 +85,95 @@ def parseTable(html)
   return parse_result
 end
 
+# コードブロックの文字修飾
+# MarkDownにはないcpprefjpの独自記法
+#
+# 記述例：
+# ```cpp
+# int main()
+# {
+#     int value = 0;
+# }
+# ```
+# value[color: ff0000]
+#
+# 記述ルール：
+# コードブロック終了直後の行から空行までを、直前のコードブロックへの修飾とする。
+#
+# 構文：
+# name[attribute-name: attribute-value(opt)]
+#
+# name : 修飾対象の名前。コードブロック内の特定文字列
+# attribute-name : 属性名。リンク、文字色、書体等。
+# attribute-value : 属性値。それぞれの属性に応じた値を入力する
+#
+# 定義可能な文字修飾：
+# name[link: http://...] : リンク修飾。nameに対して、属性値となるURLへのリンクを貼る
+# name[color: ff0000] ： 文字色修飾。nameに対して、属性値で指定された色を付ける。RGBの順に16進数2桁で指定する。
+# name[italic] : 文字を斜体にする。
+def codeBlockQualify(html)
+  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {
+    qualify_list = Array.new
+    codeblock = $1
+    codeblock = codeblock.gsub(/\[(.*?)\]\((.*?)\)/) {
+      qualify_list << {'name' => $1, 'link' => $2}
+      $1
+    }
+    codeblock = codeblock.gsub(/<color=(.*?)>(.*?)<\/color>/) {
+      qualify_list << {'name' => $2, 'color' => $1}
+      $2
+    }
+    codeblock = codeblock.gsub(/<i>(.*?)<\/i>/) {
+      qualify_list << {'name' => $1, 'italic' => true}
+      $1
+    }
+
+    codeblock = '<codeblock>' + codeblock + '</codeblock>' + "\n"
+    qualify_list.each {|qualify|
+      qualify_str = qualify['name']
+      
+      if qualify['link']
+        qualify_str = qualify_str + '[link: ' + qualify['link'] + ']'
+      end
+
+      if qualify['color']
+        qualify_str = qualify_str + '[color: ' + qualify['color'] + ']'
+      end
+
+      if qualify['italic']
+         qualify_str = qualify_str + '[italic]'
+      end
+      qualify_str = qualify_str + "\n"
+      codeblock = codeblock + qualify_str
+    }
+    codeblock
+  }
+
+end
+
+# コードブロックの解析
+def parseCodeBlock(html)
+  # コードブロックの開始
+  html = html.gsub('<div class=\'sites-codeblock sites-codesnippet-block\'>', '<codeblock>')
+
+  # コードの前後にある空行削除
+  html = html.gsub(/<codeblock>\n*/, "<codeblock>\n")
+
+  # コードブロックの終了
+  html = html.gsub(/<codeblock>(.*?\n)\n+(?=\n)/m, "<codeblock>\\1</codeblock>")
+
+  # コードブロック内のゴミ消し
+  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
+    codeblock = codeblock.gsub('<code>', '').gsub('</code>', '')
+  }
+
+  html = codeBlockQualify(html)
+  
+  # バッククォートでコードブロック
+  html = html.gsub(/<codeblock>/, '```cpp')
+  html = html.gsub(/<\/codeblock>/, '```')
+end
+
 def deleteTrash(html)
   html = html.gsub('<table class=\'sites-layout-name-one-column sites-layout-hbox\' cellspacing=\'0\'><tbody><tr><td class=\'sites-layout-tile sites-tile-name-content-1\'><div dir=\'ltr\'>', "")
   html = html.gsub('<table style=\'width:877px\' cellspacing=\'0\'><tbody><tr><td><div dir=\'ltr\'><div/>', "")
@@ -162,60 +251,8 @@ def htmlToMarkdown(html_path)
   # リンク
   html = html.gsub(/<a(.*?) href=\'(.*?)\'>(.*?)<\/a>/, '[\3](\2)')
 
-  # コードブロックの開始
-  html = html.gsub('<div class=\'sites-codeblock sites-codesnippet-block\'>', '<codeblock>')
-
-  # コードの前後にある空行削除
-  html = html.gsub(/<codeblock>\n*/, "<codeblock>\n")
-
-  # コードブロックの終了
-  html = html.gsub(/<codeblock>(.*?\n)\n+(?=\n)/m, "<codeblock>\\1</codeblock>")
-
-  # コードブロック内のゴミ消し
-  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
-    codeblock = codeblock.gsub('<code>', '').gsub('</code>', '')
-  }
-
-  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {
-    qualify_list = Array.new
-    codeblock = $1
-    codeblock = codeblock.gsub(/\[(.*?)\]\((.*?)\)/) {
-      qualify_list << {'name' => $1, 'link' => $2}
-      $1
-    }
-    codeblock = codeblock.gsub(/<color=(.*?)>(.*?)<\/color>/) {
-      qualify_list << {'name' => $2, 'color' => $1}
-      $2
-    }
-    codeblock = codeblock.gsub(/<i>(.*?)<\/i>/) {
-      qualify_list << {'name' => $1, 'italic' => true}
-      $1
-    }
-
-    codeblock = '<codeblock>' + codeblock + '</codeblock>' + "\n"
-    qualify_list.each {|qualify|
-      qualify_str = qualify['name']
-      
-      if qualify['link']
-        qualify_str = qualify_str + '[link: ' + qualify['link'] + ']'
-      end
-
-      if qualify['color']
-        qualify_str = qualify_str + '[color: ' + qualify['color'] + ']'
-      end
-
-      if qualify['italic']
-         qualify_str = qualify_str + '[italic]'
-      end
-      qualify_str = qualify_str + "\n"
-      codeblock = codeblock + qualify_str
-    }
-    codeblock
-  }
-
-  # バッククォートでコードブロック
-  html = html.gsub(/<codeblock>/, '```cpp')
-  html = html.gsub(/<\/codeblock>/, '```')
+  # コードブロック
+  html = parseCodeBlock(html)
 
   # ゴミ消し
   html = deleteAfterTrash(html)
