@@ -12,7 +12,7 @@ namespace std {
 <code>atomic</code>クラスは、型<code>T</code>をアトミック操作するためのクラスである。整数型およびポインタに対する特殊化が提供されており、それぞれに特化した演算が用意されている。その他の型に<code>atomic</code>クラスを使用する場合、型<code>T</code>はtrivially copyable (TODO)である必要がある。特殊化された整数型および<code>bool</code>型にはそれぞれ<code>atomic_T</code>という名前の<code>typedef</code>が提供される。
 
 | | |
-|--------------------------------|--------------------------------------------|
+|-----------------------------|--------------------------------|
 | 名前付きアトミック型 | テンプレート引数となる整数型 |
 |<code> atomic_char</code> |<code> char</code> |
 |<code> atomic_schar</code> |<code> signed char</code> |
@@ -31,7 +31,7 @@ namespace std {
 また、<inttypes.h>で定義される整数型に対する以下の<code>typedef</code>も提供される。
 
 | | |
-|------------------------------------|--------------------------------------------|
+|-----------------------------------|----------------------------|
 | 名前付きアトミック型 | テンプレート引数となる整数型 |
 |<code> atomic_int_least8_t</code> |<code> int_least8_t</code> |
 |<code> atomic_uint_least8_t</code> |<code> uint_least8_t</code> |
@@ -60,7 +60,7 @@ namespace std {
 ###共通メンバ関数
 
 | | |
-|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|
 | <code>[(constructor)](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/atomic)</code> | コンストラクタ |
 | <code>~atomic() = default</code> | デストラクタ |
 | <code>[operator=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_assign)</code> | 代入演算子 |
@@ -75,7 +75,7 @@ namespace std {
 ###atomic<integral>専用メンバ関数
 
 | | |
-|----------------------------------------------------------------------------------------------------------------------|-----------------------|
+|---------------------------------------------------------------------------------------------------------------------|--------|
 | <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
 | <code>[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)</code> | 減算 |
 | <code>[fetch_and](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_and)</code> | AND演算 |
@@ -92,7 +92,7 @@ namespace std {
 ###atomic<T*>専用メンバ関数
 
 | | |
-|----------------------------------------------------------------------------------------------------------------------|-----------------------|
+|---------------------------------------------------------------------------------------------------------------------|--------|
 | <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
 | <code>[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)</code> | 減算 |
 | <code>[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)</code> | インクリメント |
@@ -105,7 +105,7 @@ namespace std {
 ```cpp
 // スピンロックの実装
 // Boost Atomic Library - Usage Example
-// [http://www.boost.org/doc/libs/1_53_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_spinlock](http://www.boost.org/doc/libs/1_53_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_spinlock)
+// http://www.boost.org/doc/libs/1_53_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_spinlock
 
 #include <iostream>
 #include <atomic>
@@ -123,7 +123,7 @@ public:
   void lock()
   {
     // 現在の状態をLockedと入れ替える
-    while (state_.<color=000000>exchange</color>(Locked, std::memory_order_acquire) == Locked) {
+    while (state_.exchange(Locked, std::memory_order_acquire) == Locked) {
       // busy-wait...アンロックされるまで待機
     }
   }
@@ -131,7 +131,7 @@ public:
   void unlock()
   {
     // 値をUnlockedに更新
-    state_.<color=000000>store</color>(Unlocked, std::memory_order_release);
+    state_.store(Unlocked, std::memory_order_release);
   }
 };
 
@@ -165,10 +165,15 @@ int main()
   t2.join();
 }
 ```
+http://www.boost.org/doc/libs/1_53_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_spinlock[link: http://www.boost.org/doc/libs/1_53_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_spinlock]
+exchange[color: ff0000]
+store[color: ff0000]
+
 ###出力例
 ```cpp
 21
 ```
+
 ##バージョン
 
 ###言語

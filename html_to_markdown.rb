@@ -85,14 +85,7 @@ def parseTable(html)
   return parse_result
 end
 
-def htmlToMarkdown(html_path)
-  filename = File.basename(html_path, ".html")
-
-  html = File.open(html_path).read
-
-  # 参照文字をデコード
-  html = CGI.unescapeHTML(html)
-
+def deleteTrash(html)
   html = html.gsub('<table class=\'sites-layout-name-one-column sites-layout-hbox\' cellspacing=\'0\'><tbody><tr><td class=\'sites-layout-tile sites-tile-name-content-1\'><div dir=\'ltr\'>', "")
   html = html.gsub('<table style=\'width:877px\' cellspacing=\'0\'><tbody><tr><td><div dir=\'ltr\'><div/>', "")
   html = html.gsub("<div>", "")
@@ -113,9 +106,43 @@ def htmlToMarkdown(html_path)
 
   html = html.gsub("<br/>", "")
   html = html.gsub(/<a name=(.*?)>/, "")
+  return html
+end
 
+def deleteAfterTrash(html)
+  # 最終行を削除
+  html = html.gsub("\n</td></tr></tbody></table>", "")
+
+  # 連続する改行を削除
+  html = html.gsub(/^\n\n/, "\n")
+
+  # スペースのような何かをスペースに置き換え
+  html = html.gsub(' ', ' ')
+
+  html = html.gsub(/<div(.*?)>/, "")
+  html = html.gsub("<div/>", "")
+  html = html.gsub("<h2>", "")
+  html = html.gsub("</h2>", "")
+  html = html.gsub(/<font(.*?)>(.*?)<\/font>/, '\2')
+  html = html.gsub(/<font(.*?)>/, '')
+  html = html.gsub(/<span(.*?)>(.*?)<\/span>/, '\2')
+
+  return html
+end
+
+def htmlToMarkdown(html_path)
+  filename = File.basename(html_path, ".html")
+
+  html = File.open(html_path).read
+
+  # 参照文字をデコード
+  html = CGI.unescapeHTML(html)
+
+  # ゴミ消し
+  html = deleteTrash(html)
+ 
   # 文字色
-  html = html.gsub(/<font color=\'#ff0000\'>(.*?)<\/font>/, '<color=000000>\1</color>')
+  html = html.gsub(/<font color=\'#ff0000\'>(.*?)<\/font>/, '<color=ff0000>\1</color>')
   html = html.gsub(/<font color=\'#000000\'>(.*?)<\/font>/, '\1') # 意味がないので無視
   html = html.gsub('</font>', '') # 消し残し
 
@@ -149,27 +176,41 @@ def htmlToMarkdown(html_path)
     codeblock = codeblock.gsub('<code>', '').gsub('</code>', '')
   }
 
+  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {
+    qualify_list = Array.new
+    codeblock = $1
+    codeblock = codeblock.gsub(/\[(.*?)\]\((.*?)\)/) {
+      qualify_list << {'name' => $1, 'link' => $2}
+      $1
+    }
+    codeblock = codeblock.gsub(/<color=(.*?)>(.*?)<\/color>/) {
+      qualify_list << {'name' => $2, 'color' => $1}
+      $2
+    }
+
+    codeblock = '<codeblock>' + codeblock + '</codeblock>' + "\n"
+    qualify_list.each {|qualify|
+      qualify_str = qualify['name']
+      
+      if qualify['link']
+        qualify_str = qualify_str + '[link: ' + qualify['link'] + ']'
+      end
+
+      if qualify['color']
+        qualify_str = qualify_str + '[color: ' + qualify['color'] + ']'
+      end
+      qualify_str = qualify_str + "\n"
+      codeblock = codeblock + qualify_str
+    }
+    codeblock
+  }
+
   # バッククォートでコードブロック
   html = html.gsub(/<codeblock>/, '```cpp')
   html = html.gsub(/<\/codeblock>/, '```')
 
-  # 最終行を削除
-  html = html.gsub("\n</td></tr></tbody></table>", "")
-
-  # 連続する改行を削除
-  html = html.gsub(/^\n\n/, "\n")
-
-  # スペースのような何かをスペースに置き換え
-  html = html.gsub(' ', ' ')
-
   # ゴミ消し
-  html = html.gsub(/<div(.*?)>/, "")
-  html = html.gsub("<div/>", "")
-  html = html.gsub("<h2>", "")
-  html = html.gsub("</h2>", "")
-  html = html.gsub(/<font(.*?)>(.*?)<\/font>/, '\2')
-  html = html.gsub(/<font(.*?)>/, '')
-  html = html.gsub(/<span(.*?)>(.*?)<\/span>/, '\2')
+  html = deleteAfterTrash(html)
 
   File.open("#{filename}.md", "w") {|f|
     f.write(html)

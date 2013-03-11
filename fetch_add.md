@@ -1,7 +1,12 @@
 ```cpp
-T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) volatile noexcept;
-T fetch_add(T operand, [memory_order](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order) order = [memory_order_seq_cst](https://sites.google.com/site/cpprefjp/reference/atomic/memory_order)) noexcept;
+T fetch_add(T operand, memory_order order = memory_order_seq_cst) volatile noexcept;
+T fetch_add(T operand, memory_order order = memory_order_seq_cst) noexcept;
 ```
+memory_order[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
+memory_order_seq_cst[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
+memory_order[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
+memory_order_seq_cst[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
+
 ##概要
 
 <b>加算を行う</b>
@@ -41,18 +46,21 @@ int main()
 {
   std::atomic<int> x(3);
 
-  int before = x.<color=000000>fetch_add</color>(2);
+  int before = x.fetch_add(2);
 
   std::cout << before << std::endl;
   std::cout << x.load() << std::endl;
 }
 ```
+fetch_add[color: ff0000]
+
 ###出力
 
 ```cpp
 3
 5
 ```
+
 ##バージョン
 
 

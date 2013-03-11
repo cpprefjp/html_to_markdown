@@ -4,6 +4,7 @@ namespace std {
   void advance(InputIterator& i, Distance n);
 }
 ```
+
 ##概要
 
 <b>イテレータをn回進める。</b>
@@ -45,16 +46,19 @@ int main()
   std::vector<int> v = {3, 1, 4, 2, 5};
 
   decltype(v)::iterator i = v.begin();
-  std::<color=000000>advance</color>(i, 3); // イテレータiを3回進める
+  std::advance(i, 3); // イテレータiを3回進める
 
   std::cout << *i << std::endl;
 }
 ```
+advance[color: ff0000]
+
 ###出力
 
 ```cpp
 2
 ```
+
 ##実装例
 
 ```cpp
@@ -94,6 +98,7 @@ void advance(Iterator& i, Distance n)
           // イテレータのカテゴリごとに最適な実装を選択させる
 }
 ```
+
 ##参照
 
 
