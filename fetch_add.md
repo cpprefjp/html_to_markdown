@@ -2,10 +2,10 @@
 T fetch_add(T operand, memory_order order = memory_order_seq_cst) volatile noexcept;
 T fetch_add(T operand, memory_order order = memory_order_seq_cst) noexcept;
 ```
-memory_order[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
-memory_order_seq_cst[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
-memory_order[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
-memory_order_seq_cst[link: https://sites.google.com/site/cpprefjp/reference/atomic/memory_order]
+memory_order<link https://sites.google.com/site/cpprefjp/reference/atomic/memory_order>
+memory_order_seq_cst<link https://sites.google.com/site/cpprefjp/reference/atomic/memory_order>
+memory_order<link https://sites.google.com/site/cpprefjp/reference/atomic/memory_order>
+memory_order_seq_cst<link https://sites.google.com/site/cpprefjp/reference/atomic/memory_order>
 
 ##概要
 
@@ -52,7 +52,7 @@ int main()
   std::cout << x.load() << std::endl;
 }
 ```
-fetch_add[color: ff0000]
+fetch_add<color ff0000>
 
 ###出力
 
