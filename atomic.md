@@ -2,10 +2,11 @@
 namespace std {
   template<class T> struct atomic;
 
-  template<> struct atomic<<i>integral</i>>;
+  template<> struct atomic<integral>;
   template<class T> struct atomic<T*>;
 }
 ```
+integral[italic]
 
 ##概要
 

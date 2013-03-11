@@ -187,6 +187,10 @@ def htmlToMarkdown(html_path)
       qualify_list << {'name' => $2, 'color' => $1}
       $2
     }
+    codeblock = codeblock.gsub(/<i>(.*?)<\/i>/) {
+      qualify_list << {'name' => $1, 'italic' => true}
+      $1
+    }
 
     codeblock = '<codeblock>' + codeblock + '</codeblock>' + "\n"
     qualify_list.each {|qualify|
@@ -198,6 +202,10 @@ def htmlToMarkdown(html_path)
 
       if qualify['color']
         qualify_str = qualify_str + '[color: ' + qualify['color'] + ']'
+      end
+
+      if qualify['italic']
+         qualify_str = qualify_str + '[italic]'
       end
       qualify_str = qualify_str + "\n"
       codeblock = codeblock + qualify_str
