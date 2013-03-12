@@ -87,7 +87,7 @@ namespace std {
 | [`operator+=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign) | 加算 |
 | [`operator-=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign) | 減算 |
 | [`operator&=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_and_assign) | AND演算 |
-| [`operator&#x7C;=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_or_assign) | OR演算 |
+| [`operator|=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_or_assign) | OR演算 |
 | [`operator^=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_xor_assign) | XOR演算 |
 
 ###atomic<T*>専用メンバ関数

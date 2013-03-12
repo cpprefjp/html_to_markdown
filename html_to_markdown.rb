@@ -61,7 +61,6 @@ def makeTableBody(body, col_width_list)
     result = result + "|"
 
     row.each {|data|
-      data = data.gsub('|', '&#x7C;')
       result = result + data + " |"
     }
   }
