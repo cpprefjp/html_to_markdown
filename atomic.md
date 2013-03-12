@@ -10,96 +10,96 @@ namespace std {
 
 ##概要
 
-<code>atomic</code>クラスは、型<code>T</code>をアトミック操作するためのクラスである。整数型およびポインタに対する特殊化が提供されており、それぞれに特化した演算が用意されている。その他の型に<code>atomic</code>クラスを使用する場合、型<code>T</code>はtrivially copyable (TODO)である必要がある。特殊化された整数型および<code>bool</code>型にはそれぞれ<code>atomic_T</code>という名前の<code>typedef</code>が提供される。
+`atomic`クラスは、型`T`をアトミック操作するためのクラスである。整数型およびポインタに対する特殊化が提供されており、それぞれに特化した演算が用意されている。その他の型に`atomic`クラスを使用する場合、型`T`はtrivially copyable (TODO)である必要がある。特殊化された整数型および`bool`型にはそれぞれ`atomic_T`という名前の`typedef`が提供される。
 
 | | |
 |-----------------------------|--------------------------------|
 | 名前付きアトミック型 | テンプレート引数となる整数型 |
-|<code> atomic_char</code> |<code> char</code> |
-|<code> atomic_schar</code> |<code> signed char</code> |
-|<code> atomic_uchar</code> |<code> unsigned char</code> |
-|<code> atomic_short</code> |<code> short</code> |
-|<code> atomic_ushort</code> |<code> unsigned short</code> |
-|<code> atomic_int</code> |<code> int</code> |
-|<code> atomic_long</code> |<code> long</code> |
-|<code> atomic_ulong</code> |<code> unsigned long</code> |
-|<code> atomic_llong</code> |<code> long long</code> |
-|<code> atomic_ullong</code> |<code> unsigned long long</code> |
-|<code> atomic_char16_t</code> |<code> char16_t</code> |
-|<code> atomic_char32_t</code> |<code> char32_t</code> |
-|<code> atomic_wchar_t</code> |<code> wchar_t</code> |
-|<code> atomic_bool</code> |<code> bool</code> |
-また、<inttypes.h>で定義される整数型に対する以下の<code>typedef</code>も提供される。
+|` atomic_char` |` char` |
+|` atomic_schar` |` signed char` |
+|` atomic_uchar` |` unsigned char` |
+|` atomic_short` |` short` |
+|` atomic_ushort` |` unsigned short` |
+|` atomic_int` |` int` |
+|` atomic_long` |` long` |
+|` atomic_ulong` |` unsigned long` |
+|` atomic_llong` |` long long` |
+|` atomic_ullong` |` unsigned long long` |
+|` atomic_char16_t` |` char16_t` |
+|` atomic_char32_t` |` char32_t` |
+|` atomic_wchar_t` |` wchar_t` |
+|` atomic_bool` |` bool` |
+また、<inttypes.h>で定義される整数型に対する以下の`typedef`も提供される。
 
 | | |
 |-----------------------------------|----------------------------|
 | 名前付きアトミック型 | テンプレート引数となる整数型 |
-|<code> atomic_int_least8_t</code> |<code> int_least8_t</code> |
-|<code> atomic_uint_least8_t</code> |<code> uint_least8_t</code> |
-|<code> atomic_int_least16_t</code> |<code> int_least16_t</code> |
-|<code> atomic_uint_least16_t</code> |<code> uint_least16_t</code> |
-|<code> atomic_int_least32_t</code> |<code> int_least32_t</code> |
-|<code> atomic_uint_least32_t</code> |<code> uint_least32_t</code> |
-|<code> atomic_int_least64_t</code> |<code> int_least64_t</code> |
-|<code> atomic_uint_least64_t</code> |<code> uint_least64_t</code> |
-|<code> atomic_int_fast8_t</code> |<code> int_fast8_t</code> |
-|<code> atomic_uint_fast8_t</code> |<code> uint_fast8_t</code> |
-|<code> atomic_int_fast16_t</code> |<code> int_fast16_t</code> |
-|<code> atomic_uint_fast16_t</code> |<code> uint_fast16_t</code> |
-|<code> atomic_int_fast32_t</code> |<code> int_fast32_t</code> |
-|<code> atomic_uint_fast32_t</code> |<code> uint_fast32_t</code> |
-|<code> atomic_int_fast64_t</code> |<code> int_fast64_t</code> |
-|<code> atomic_uint_fast64_t</code> |<code> uint_fast64_t</code> |
-|<code> atomic_intptr_t</code> |<code> intptr_t</code> |
-|<code> atomic_uintptr_t</code> |<code> uintptr_t</code> |
-|<code> atomic_size_t</code> |<code> size_t</code> |
-|<code> atomic_ptrdiff_t</code> |<code> ptrdiff_t</code> |
-|<code> atomic_intmax_t</code> |<code> intmax_t</code> |
-|<code> atomic_uintmax_t</code> |<code> uintmax_t</code> |
-<code>void*</code>に対する特殊化の<code>typedef</code>として、<code>atomic_address</code>型が提供される。
+|` atomic_int_least8_t` |` int_least8_t` |
+|` atomic_uint_least8_t` |` uint_least8_t` |
+|` atomic_int_least16_t` |` int_least16_t` |
+|` atomic_uint_least16_t` |` uint_least16_t` |
+|` atomic_int_least32_t` |` int_least32_t` |
+|` atomic_uint_least32_t` |` uint_least32_t` |
+|` atomic_int_least64_t` |` int_least64_t` |
+|` atomic_uint_least64_t` |` uint_least64_t` |
+|` atomic_int_fast8_t` |` int_fast8_t` |
+|` atomic_uint_fast8_t` |` uint_fast8_t` |
+|` atomic_int_fast16_t` |` int_fast16_t` |
+|` atomic_uint_fast16_t` |` uint_fast16_t` |
+|` atomic_int_fast32_t` |` int_fast32_t` |
+|` atomic_uint_fast32_t` |` uint_fast32_t` |
+|` atomic_int_fast64_t` |` int_fast64_t` |
+|` atomic_uint_fast64_t` |` uint_fast64_t` |
+|` atomic_intptr_t` |` intptr_t` |
+|` atomic_uintptr_t` |` uintptr_t` |
+|` atomic_size_t` |` size_t` |
+|` atomic_ptrdiff_t` |` ptrdiff_t` |
+|` atomic_intmax_t` |` intmax_t` |
+|` atomic_uintmax_t` |` uintmax_t` |
+`void*`に対する特殊化の`typedef`として、`atomic_address`型が提供される。
 
 ###共通メンバ関数
 
 | | |
 |------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|
-| <code>[(constructor)](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/atomic)</code> | コンストラクタ |
-| <code>~atomic() = default</code> | デストラクタ |
-| <code>[operator=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_assign)</code> | 代入演算子 |
-| <code>[is_lock_free](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/is_lock_free)</code> | オブジェクトがロックフリーに振る舞えるかを判定する |
-| <code>[store](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/store)</code> | 値を書き込む |
-| <code>[load](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/load)</code> | 値を読み込む |
-| <code>[operator T](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_t)</code> | 型Tへの変換演算子 |
-| <code>[exchange](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/exchange)</code> | 値を入れ替える |
-| <code>[compare_exchange_weak](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_weak)</code> | 弱い比較で値を入れ替える |
-| <code>[compare_exchange_strong](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_strong)</code> | 強い比較で値を入れ替える |
+| `[(constructor)](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/atomic)` | コンストラクタ |
+| `~atomic() = default` | デストラクタ |
+| `[operator=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_assign)` | 代入演算子 |
+| `[is_lock_free](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/is_lock_free)` | オブジェクトがロックフリーに振る舞えるかを判定する |
+| `[store](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/store)` | 値を書き込む |
+| `[load](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/load)` | 値を読み込む |
+| `[operator T](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_t)` | 型Tへの変換演算子 |
+| `[exchange](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/exchange)` | 値を入れ替える |
+| `[compare_exchange_weak](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_weak)` | 弱い比較で値を入れ替える |
+| `[compare_exchange_strong](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_strong)` | 強い比較で値を入れ替える |
 
 ###atomic<integral>専用メンバ関数
 
 | | |
 |---------------------------------------------------------------------------------------------------------------------|--------|
-| <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
-| <code>[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)</code> | 減算 |
-| <code>[fetch_and](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_and)</code> | AND演算 |
-| <code>[fetch_or](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_or)</code> | OR演算 |
-| <code>[fetch_xor](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_xor)</code> | XOR演算 |
-| <code>[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)</code> | インクリメント |
-| <code>[operator--](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement)</code> | デクリメント |
-| <code>[operator+=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign)</code> | 加算 |
-| <code>[operator-=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign)</code> | 減算 |
-| <code>[operator&=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_and_assign)</code> | AND演算 |
-| <code>[operator&#x7C;=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_or_assign)</code> | OR演算 |
-| <code>[operator^=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_xor_assign)</code> | XOR演算 |
+| `[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)` | 加算 |
+| `[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)` | 減算 |
+| `[fetch_and](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_and)` | AND演算 |
+| `[fetch_or](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_or)` | OR演算 |
+| `[fetch_xor](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_xor)` | XOR演算 |
+| `[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)` | インクリメント |
+| `[operator--](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement)` | デクリメント |
+| `[operator+=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign)` | 加算 |
+| `[operator-=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign)` | 減算 |
+| `[operator&=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_and_assign)` | AND演算 |
+| `[operator&#x7C;=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_or_assign)` | OR演算 |
+| `[operator^=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_xor_assign)` | XOR演算 |
 
 ###atomic<T*>専用メンバ関数
 
 | | |
 |---------------------------------------------------------------------------------------------------------------------|--------|
-| <code>[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)</code> | 加算 |
-| <code>[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)</code> | 減算 |
-| <code>[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)</code> | インクリメント |
-| <code>[operator--](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement)</code> | デクリメント |
-| <code>[operator+=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign)</code> | 加算 |
-| <code>[operator-=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign)</code> | 減算 |
+| `[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)` | 加算 |
+| `[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)` | 減算 |
+| `[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)` | インクリメント |
+| `[operator--](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement)` | デクリメント |
+| `[operator+=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign)` | 加算 |
+| `[operator-=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign)` | 減算 |
 
 ###例
 

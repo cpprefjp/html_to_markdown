@@ -14,7 +14,7 @@ T fetch_add(T operand, memory_order order = memory_order_seq_cst) noexcept;
 
 ##効果
 
-<code>order</code>で指定されたメモリオーダーにしたがって、現在の値に<code>operandを加算した値</code>でアトミックに置き換える
+`order`で指定されたメモリオーダーにしたがって、現在の値に`operandを加算した値`でアトミックに置き換える
 
 
 
@@ -31,7 +31,7 @@ T fetch_add(T operand, memory_order order = memory_order_seq_cst) noexcept;
 
 ##備考
 
-この関数は、<code>atomic</code>クラスの整数型およびポインタに対する特殊化で定義される。
+この関数は、`atomic`クラスの整数型およびポインタに対する特殊化で定義される。
 
 符号付き整数型に対しては、2の補数表現による演算が行われ、未定義動作はない。アドレス型に関しては結果として未定義アドレスになる場合があるが、それ以外の未定義動作はない。
 

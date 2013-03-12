@@ -254,6 +254,9 @@ def htmlToMarkdown(html_path)
   # コードブロック
   html = parseCodeBlock(html)
 
+  # コード
+  html = html.gsub(/<code>(.*?)<\/code>/, '`\1`')
+
   # ゴミ消し
   html = deleteAfterTrash(html)
 
