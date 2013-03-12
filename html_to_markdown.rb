@@ -61,6 +61,7 @@ def makeTableBody(body, col_width_list)
     result = result + "|"
 
     row.each {|data|
+      data = data.gsub('|', '&#x7C;')
       result = result + data + " |"
     }
   }
@@ -254,7 +255,13 @@ def htmlToMarkdown(html_path)
   html = parseCodeBlock(html)
 
   # コード
-  html = html.gsub(/<code>(.*?)<\/code>/, '`\1`')
+  html = html.gsub(/<code>(.*?)<\/code>/) {
+	if $1.index('&#') == nil
+      '`' + $1 + '`'
+	else
+      '<code>' + $1 + '</code>'
+	end
+  }
   html = html.gsub(/`\[(.*?)\]\((.*?)\)`/, '[`\1`](\2)')
 
   # ゴミ消し
