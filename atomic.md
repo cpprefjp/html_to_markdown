@@ -62,44 +62,44 @@ namespace std {
 
 | | |
 |------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|
-| `[(constructor)](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/atomic)` | コンストラクタ |
+| [`(constructor)`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/atomic) | コンストラクタ |
 | `~atomic() = default` | デストラクタ |
-| `[operator=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_assign)` | 代入演算子 |
-| `[is_lock_free](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/is_lock_free)` | オブジェクトがロックフリーに振る舞えるかを判定する |
-| `[store](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/store)` | 値を書き込む |
-| `[load](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/load)` | 値を読み込む |
-| `[operator T](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_t)` | 型Tへの変換演算子 |
-| `[exchange](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/exchange)` | 値を入れ替える |
-| `[compare_exchange_weak](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_weak)` | 弱い比較で値を入れ替える |
-| `[compare_exchange_strong](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_strong)` | 強い比較で値を入れ替える |
+| [`operator=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_assign) | 代入演算子 |
+| [`is_lock_free`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/is_lock_free) | オブジェクトがロックフリーに振る舞えるかを判定する |
+| [`store`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/store) | 値を書き込む |
+| [`load`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/load) | 値を読み込む |
+| [`operator T`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_t) | 型Tへの変換演算子 |
+| [`exchange`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/exchange) | 値を入れ替える |
+| [`compare_exchange_weak`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_weak) | 弱い比較で値を入れ替える |
+| [`compare_exchange_strong`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/compare_exchange_strong) | 強い比較で値を入れ替える |
 
 ###atomic<integral>専用メンバ関数
 
 | | |
 |---------------------------------------------------------------------------------------------------------------------|--------|
-| `[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)` | 加算 |
-| `[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)` | 減算 |
-| `[fetch_and](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_and)` | AND演算 |
-| `[fetch_or](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_or)` | OR演算 |
-| `[fetch_xor](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_xor)` | XOR演算 |
-| `[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)` | インクリメント |
-| `[operator--](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement)` | デクリメント |
-| `[operator+=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign)` | 加算 |
-| `[operator-=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign)` | 減算 |
-| `[operator&=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_and_assign)` | AND演算 |
-| `[operator&#x7C;=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_or_assign)` | OR演算 |
-| `[operator^=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_xor_assign)` | XOR演算 |
+| [`fetch_add`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add) | 加算 |
+| [`fetch_sub`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub) | 減算 |
+| [`fetch_and`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_and) | AND演算 |
+| [`fetch_or`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_or) | OR演算 |
+| [`fetch_xor`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_xor) | XOR演算 |
+| [`operator++`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment) | インクリメント |
+| [`operator--`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement) | デクリメント |
+| [`operator+=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign) | 加算 |
+| [`operator-=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign) | 減算 |
+| [`operator&=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_and_assign) | AND演算 |
+| [`operator&#x7C;=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_or_assign) | OR演算 |
+| [`operator^=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_xor_assign) | XOR演算 |
 
 ###atomic<T*>専用メンバ関数
 
 | | |
 |---------------------------------------------------------------------------------------------------------------------|--------|
-| `[fetch_add](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add)` | 加算 |
-| `[fetch_sub](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub)` | 減算 |
-| `[operator++](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment)` | インクリメント |
-| `[operator--](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement)` | デクリメント |
-| `[operator+=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign)` | 加算 |
-| `[operator-=](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign)` | 減算 |
+| [`fetch_add`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_add) | 加算 |
+| [`fetch_sub`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/fetch_sub) | 減算 |
+| [`operator++`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_increment) | インクリメント |
+| [`operator--`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_decrement) | デクリメント |
+| [`operator+=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_plus_assign) | 加算 |
+| [`operator-=`](https://sites.google.com/site/cpprefjp/reference/atomic/atomic/op_minus_assign) | 減算 |
 
 ###例
 
