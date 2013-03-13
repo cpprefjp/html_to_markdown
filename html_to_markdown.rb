@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*- 
 
 require 'cgi'
+require 'fileutils'
 
 def getTdList(tds)
   td_list = Array.new
@@ -161,6 +162,13 @@ def parseCodeBlock(html)
 
   # コードブロックの終了
   html = html.gsub(/<codeblock>(.*?\n)\n+(?=\n)/m, "<codeblock>\\1</codeblock>")
+  html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|matched|
+    if $1.index('##')
+      matched.sub(/<codeblock>(.*?)##/m, "<codeblock>\\1</codeblock>\n##")
+    else
+      matched
+    end
+  }
 
   # コードブロック内のゴミ消し
   html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {|codeblock|
@@ -219,7 +227,7 @@ def deleteAfterTrash(html)
   return html
 end
 
-def htmlToMarkdown(html_path)
+def htmlToMarkdown(html_path, markdown_path)
   filename = File.basename(html_path, ".html")
 
   html = File.open(html_path).read
@@ -256,25 +264,51 @@ def htmlToMarkdown(html_path)
 
   # コード
   html = html.gsub(/<code>(.*?)<\/code>/) {
-	if $1.index('&#') == nil
+    if $1.index('&#') == nil
       '`' + $1 + '`'
-	else
+    else
       '<code>' + $1 + '</code>'
-	end
+    end
   }
   html = html.gsub(/`\[(.*?)\]\((.*?)\)`/, '[`\1`](\2)')
 
   # ゴミ消し
   html = deleteAfterTrash(html)
 
-  File.open("#{filename}.md", "w") {|f|
+  FileUtils.makedirs(File.dirname(markdown_path))
+  File.open(markdown_path, 'w') {|f|
     f.write(html)
   }
 
   #puts html
 end
 
-htmlToMarkdown('advance.html')
-htmlToMarkdown('fetch_add.html')
-htmlToMarkdown('atomic.html')
+def enumerateRecursiveDir(path)
+  Dir::foreach(path) {|f|
+    next if f == '.' or  f == '..'
+    if path =~ /\/$/
+      f = path + f
+    else
+      f = path + '/' + f
+    end
+    if FileTest::directory?(f)
+      enumerateRecursiveDir(f) {|nested_file|
+        yield nested_file
+      }
+    else
+      yield f
+    end
+  }
+end
+
+# htmlToMarkdown('advance.html')
+# htmlToMarkdown('fetch_add.html')
+# htmlToMarkdown('atomic.html')
+
+enumerateRecursiveDir('html') {|html_path|
+  markdown_path = html_path.sub(/html(.*?).html/) {
+    'markdown' + $1 + '.md'
+  }
+  htmlToMarkdown(html_path, markdown_path)
+}
 
