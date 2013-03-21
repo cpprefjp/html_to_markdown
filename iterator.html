@@ -1,0 +1,102 @@
+<table class='sites-layout-name-one-column sites-layout-hbox' cellspacing='0'><tbody><tr><td class='sites-layout-tile sites-tile-name-content-1'><div dir='ltr'><div>&lt;iterator&gt;ヘッダでは、イテレータに関する機能群を提供する。</div><div>イテレータは日本語では反復子とも呼ばれ、配列やコンテナのような範囲を横断する手段として使用できる。</div><div><br/></div><div>C++標準ライブラリのイテレータは、以下のように階層的に定義される。</div><div>この階層はC++言語機能の継承と同じように見なせる。たとえば、入力イテレータと前方向イテレータはis a関係が成り立っており、前方向イテレータは入力イテレータと見なすことができる。</div><div><br/></div><div><div style='display:block;text-align:left'><div style='display:block;text-align:left'><a rel='nofollow' imageanchor='1' href='https://raw.github.com/cpprefjp/image/master/reference/iterator/iterators.png'><img src='https://raw.github.com/cpprefjp/image/master/reference/iterator/iterators.png' border='0'/></a></div><br/></div><br/></div><div><div><div><br/>
+</div>
+<div>
+<table style='border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px' cellspacing='0' bordercolor='#888' border='1'>
+<tbody>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/iterator_traits'>iterator_traits</a></font></code></td>
+<td style='width:478px;height:15px'> イテレータに関する型情報(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/iterator'>iterator</a></font></code></td>
+<td style='width:478px;height:15px'> イテレータを定義するための基本クラス(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/iterator_tag'>input_iterator_tag</a></font></code></td>
+<td style='width:478px;height:15px'> 入力イテレータを表すタグ(class)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/iterator_tag'>output_iterator_tag</a></font></code></td>
+<td style='width:478px;height:15px'> 出力イテレータを表すタグ(class)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/iterator_tag'>forward_iterator_tag</a></font></code></td>
+<td style='width:478px;height:15px'> 前方向イテレータを表すタグ(class)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/iterator_tag'>bidirectional_iterator_tag</a></font>
+</code></td>
+<td style='width:478px;height:15px'> 双方向イテレータを表すタグ(class)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/iterator_tag'>random_access_iterator_tag</a></font></code></td>
+<td style='width:478px;height:15px'> ランダムアクセスイテレータを表すタグ(class)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/advance'>advance</a></font></code></td>
+<td style='width:478px;height:15px'> イテレータを進める(function template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/distance'>distance</a></font></code></td>
+<td style='width:478px;height:15px'> イテレータ間の距離を求める(function template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/next'>next</a></font></code></td>
+<td style='width:478px;height:15px'> イテレータを進める(function template) (<font color='#0000ff'>C++11</font>)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/prev'>prev</a></font></code></td>
+<td style='width:478px;height:15px'> イテレータを後方に進める(function template) (<font color='#0000ff'>C++11</font>)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/reverse_iterator'>reverse_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 逆方向に進むイテレータアダプタ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/back_insert_iterator'>back_insert_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 末尾に要素を挿入する出力イテレータアダプタ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/front_insert_iterator'>front_insert_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 先頭に要素を挿入する出力イテレータアダプタ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/insert_iterator'>insert_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 任意の位置に要素を挿入する出力イテレータアダプタ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/move_iterator'>move_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 間接参照時にムーブするイテレータアダプタ(class template) (<font color='#0000ff'>C++11</font>)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/istream_iterator'>istream_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 入力ストリームイテレータ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/ostream_iterator'>ostream_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 出力ストリームイテレータ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/istreambuf_iterator'>istreambuf_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 入力ストリームバッファイテレータ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/ostreambuf_iterator'>ostreambuf_iterator</a></font></code></td>
+<td style='width:478px;height:15px'> 出力ストリームバッファイテレータ(class template)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/begin'>begin</a></font></code></td>
+<td style='width:478px;height:15px'> 範囲の先頭を指すイテレータを取得する(function template) (<font color='#0000ff'>C++11</font>)</td>
+</tr>
+<tr>
+<td style='width:201px;height:15px'> <code><font color='#000000'><a href='https://sites.google.com/site/cpprefjp/reference/iterator/end'>end</a></font></code></td>
+<td style='width:478px;height:15px'> 範囲の末尾の次を指すイテレータを取得する(function template) (<font color='#0000ff'>C++11</font>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<br/>
+<div><br/>
+</div></div></td></tr></tbody></table>

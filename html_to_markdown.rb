@@ -6,7 +6,7 @@ require 'fileutils'
 
 def getTdList(tds)
   td_list = Array.new
-  tds.gsub(/<td(.*?)>(.*?)<\/td>/) {
+  tds.gsub(/<td(.*?)>(.*?)<\/td>/m) {
     td_list << $2
   }
   return td_list
@@ -14,7 +14,7 @@ end
 
 def getTrList(trs)
   tr_list = Array.new
-  trs.gsub(/<tr>(.*?)<\/tr>/) {
+  trs.gsub(/<tr>(.*?)<\/tr>/m) {
     tr_list << $1
   }
 
@@ -71,7 +71,7 @@ end
 
 # テーブルの解析
 def parseTable(html)
-  parse_result = html.gsub(/<table(.*?)><tbody>(.*?)<\/tbody><\/table>/){|matched|
+  parse_result = html.gsub(/<table(.*?)>(.*?)<tbody>(.*?)<\/tbody>(.*?)<\/table>/m){|matched|
     table = matched # <tr><td>...</td></tr>...</tr>
     tr_list = getTrList(table)
     col_width_list = getColumnWidthList(tr_list)
@@ -233,6 +233,13 @@ def deleteAfterTrash(html)
   return html
 end
 
+# 画像埋め込みのパース
+def parseImage(html)
+  html = html.gsub(/<a rel='nofollow' imageanchor='1' href='(.*?)'>(.*?)<\/a>/, '\2')
+  html = html.gsub(/<img src='(.*?)' border='0'\/>/, '![](\1)')
+  return html
+end
+
 def htmlToMarkdown(html_path, markdown_path)
   filename = File.basename(html_path, ".html")
 
@@ -261,6 +268,9 @@ def htmlToMarkdown(html_path, markdown_path)
   html = html.gsub(/<li>(.*?)<\/li>/, "\n- \\1")
   html = html.gsub('<ul>', "")
   html = html.gsub('</ul>', "")
+
+  # 画像埋め込み
+  html = parseImage(html)
 
   # リンク
   html = html.gsub(/<a(.*?) href=\'(.*?)\'>(.*?)<\/a>/, '[\3](\2)')
@@ -307,14 +317,16 @@ def enumerateRecursiveDir(path)
   }
 end
 
-# htmlToMarkdown('advance.html')
-# htmlToMarkdown('fetch_add.html')
-# htmlToMarkdown('atomic.html')
+# htmlToMarkdown('advance.html', 'advance.md')
+# htmlToMarkdown('fetch_add.html', 'fetch_add.md')
+# htmlToMarkdown('atomic.html', 'atomic.md')
+# htmlToMarkdown('iterator.html', 'iterator.md')
 
 enumerateRecursiveDir('html') {|html_path|
   markdown_path = html_path.sub(/html(.*?).html/) {
     'markdown' + $1 + '.md'
   }
+  puts markdown_path
   htmlToMarkdown(html_path, markdown_path)
 }
 
