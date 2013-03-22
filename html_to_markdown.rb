@@ -240,6 +240,11 @@ def parseImage(html)
   return html
 end
 
+# URLをサイト内リンクに変換
+def convertLink(html)
+  return html.gsub(/href='https:\/\/sites.google.com\/site\/cpprefjp\/(.*?)'/, "href=\'/\\1\'")
+end
+
 def htmlToMarkdown(html_path, markdown_path)
   filename = File.basename(html_path, ".html")
 
@@ -273,6 +278,7 @@ def htmlToMarkdown(html_path, markdown_path)
   html = parseImage(html)
 
   # リンク
+  html = convertLink(html)
   html = html.gsub(/<a(.*?) href=\'(.*?)\'>(.*?)<\/a>/, '[\3](\2)')
 
   # コードブロック
@@ -326,7 +332,6 @@ enumerateRecursiveDir('html') {|html_path|
   markdown_path = html_path.sub(/html(.*?).html/) {
     'markdown' + $1 + '.md'
   }
-  puts markdown_path
   htmlToMarkdown(html_path, markdown_path)
 }
 
