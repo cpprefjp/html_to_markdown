@@ -116,11 +116,15 @@ def codeBlockQualify(html)
   html = html.gsub(/<codeblock>(.*?)<\/codeblock>/m) {
     qualify_list = Array.new
     codeblock = $1
-    codeblock = codeblock.gsub(/\[(.*?)\]\((.*?)\)/) {
-      if qualify_list.select{|x| x['name'] == $1 && x['link'] != nil } == []
-        qualify_list << {'name' => $1, 'link' => $2}
+    codeblock = codeblock.gsub(/\[(.*?)\]\((.*?)\)/) {|matched|
+      if matched.index('/') == nil
+        matched
+      else
+        if qualify_list.select{|x| x['name'] == $1 && x['link'] != nil } == []
+          qualify_list << {'name' => $1, 'link' => $2}
+        end
+        $1
       end
-      $1
     }
     codeblock = codeblock.gsub(/<color=(.*?)>(.*?)<\/color>/) {
       if qualify_list.select{|x| x['name'] == $1 && x['color'] != nil } == []
