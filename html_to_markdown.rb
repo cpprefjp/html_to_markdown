@@ -240,14 +240,41 @@ def parseImage(html)
   return html
 end
 
+# 差分階層を作る
+def makeSubHierarchy(a, b)
+  b.size.times {|i|
+    if a[i] != b[i]
+      return a
+    end
+  }
+  return a[b.size, a.size - b.size]
+end
+
 # URLをサイト内リンクに変換
-def convertLink(html)
+def convertLink(html, path)
+  path = path.gsub(/html\/(.*?).html/, '\1') # サイト内絶対パスの形式を合わせる
+  path_hierarchy = path.split('/')
+
+  return html.gsub(/href='https:\/\/sites.google.com\/site\/cpprefjp\/(.*?)'/) {
+    link = $1
+    link_hierarchy = link.split('/')
+
+    sub_hierarchy = makeSubHierarchy(link_hierarchy, path_hierarchy)
+
+    new_link = if sub_hierarchy.size == link_hierarchy.size
+                 '/' + link # サイト内絶対パス
+               else
+                 './' + sub_hierarchy.join('/') # サイト内相対パス
+               end
+
+    "href='" + new_link + "'"
+  }
+
+  # サイト内絶対パス
   return html.gsub(/href='https:\/\/sites.google.com\/site\/cpprefjp\/(.*?)'/, "href=\'/\\1\'")
 end
 
 def htmlToMarkdown(html_path, markdown_path)
-  filename = File.basename(html_path, ".html")
-
   html = File.open(html_path).read
 
   # 参照文字をデコード
@@ -278,7 +305,7 @@ def htmlToMarkdown(html_path, markdown_path)
   html = parseImage(html)
 
   # リンク
-  html = convertLink(html)
+  html = convertLink(html, html_path)
   html = html.gsub(/<a(.*?) href=\'(.*?)\'>(.*?)<\/a>/, '[\3](\2)')
 
   # コードブロック
@@ -332,6 +359,7 @@ enumerateRecursiveDir('html') {|html_path|
   markdown_path = html_path.sub(/html(.*?).html/) {
     'markdown' + $1 + '.md'
   }
+
   htmlToMarkdown(html_path, markdown_path)
 }
 
