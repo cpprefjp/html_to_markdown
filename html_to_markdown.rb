@@ -295,6 +295,9 @@ def htmlToMarkdown(html_path, markdown_path)
   # テーブル
   html = parseTable(html)
 
+  # タイトル
+  html = html.gsub(/<title>(.*?)<\/title>/, '#\1')
+
   # 見出し
   html = html.gsub(/<h2(.*?)>(.*?)<\/h2>/, "\n\n##\\2\n")
   html = html.gsub(/<h3><\/h3>/, '')
