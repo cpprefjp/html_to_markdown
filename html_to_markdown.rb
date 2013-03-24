@@ -251,7 +251,7 @@ def makeSubHierarchy(a, b)
       return a
     end
   }
-  return a[b.size, a.size - b.size]
+  return a[b.size - 1, a.size - b.size + 1]
 end
 
 # URLをサイト内リンクに変換
