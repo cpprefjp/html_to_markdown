@@ -360,11 +360,11 @@ def enumerateRecursiveDir(path)
   }
 end
 
-htmlToMarkdown('advance.html', 'advance.md')
-htmlToMarkdown('fetch_add.html', 'fetch_add.md')
-htmlToMarkdown('atomic.html', 'atomic.md')
-htmlToMarkdown('iterator.html', 'iterator.md')
-htmlToMarkdown('reference.html', 'reference.md')
+#htmlToMarkdown('advance.html', 'advance.md')
+#htmlToMarkdown('fetch_add.html', 'fetch_add.md')
+#htmlToMarkdown('atomic.html', 'atomic.md')
+#htmlToMarkdown('iterator.html', 'iterator.md')
+#htmlToMarkdown('reference.html', 'reference.md')
 
 enumerateRecursiveDir('html') {|html_path|
   markdown_path = html_path.sub(/html(.*?).html/) {
