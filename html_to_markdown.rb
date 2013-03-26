@@ -232,7 +232,10 @@ def deleteAfterTrash(html)
   html = html.gsub("</h2>", "")
   html = html.gsub(/<font(.*?)>(.*?)<\/font>/, '\2')
   html = html.gsub(/<font(.*?)>/, '')
+
+  html = html.gsub(/<span style=\'background-color:(.*?)\'>(.*?)<\/span>/m, '<backcolor:\1>\2</backcolor>')
   html = html.gsub(/<span(.*?)>(.*?)<\/span>/, '\2')
+  html = html.gsub(/<backcolor:(.*?)>(.*?)<\/backcolor>/m, "<span style=\'background-color:\\1>\\2<\/span>")
 
   return html
 end
@@ -357,10 +360,11 @@ def enumerateRecursiveDir(path)
   }
 end
 
-# htmlToMarkdown('advance.html', 'advance.md')
-# htmlToMarkdown('fetch_add.html', 'fetch_add.md')
-# htmlToMarkdown('atomic.html', 'atomic.md')
-# htmlToMarkdown('iterator.html', 'iterator.md')
+htmlToMarkdown('advance.html', 'advance.md')
+htmlToMarkdown('fetch_add.html', 'fetch_add.md')
+htmlToMarkdown('atomic.html', 'atomic.md')
+htmlToMarkdown('iterator.html', 'iterator.md')
+htmlToMarkdown('reference.html', 'reference.md')
 
 enumerateRecursiveDir('html') {|html_path|
   markdown_path = html_path.sub(/html(.*?).html/) {
