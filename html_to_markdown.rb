@@ -275,11 +275,9 @@ def convertLink(html, path)
                  './' + sub_hierarchy.join('/') # サイト内相対パス
                end
 
+	new_link = new_link + ".md"
     "href='" + new_link + "'"
   }
-
-  # サイト内絶対パス
-  return html.gsub(/href='https:\/\/sites.google.com\/site\/cpprefjp\/(.*?)'/, "href=\'/\\1\'")
 end
 
 def htmlToMarkdown(html_path, markdown_path)
