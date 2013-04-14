@@ -236,7 +236,7 @@ def deleteAfterTrash(html)
 
   html = html.gsub(/<span style=\'background-color:(.*?)\'>(.*?)<\/span>/m, '<backcolor:\1>\2</backcolor>')
   html = html.gsub(/<span(.*?)>(.*?)<\/span>/, '\2')
-  html = html.gsub(/<backcolor:(.*?)>(.*?)<\/backcolor>/m, "<span style=\'background-color:\\1>\\2<\/span>")
+  html = html.gsub(/<backcolor:(.*?)>(.*?)<\/backcolor>/m, "<span style=\'background-color:\\1\'>\\2<\/span>")
 
   return html
 end
