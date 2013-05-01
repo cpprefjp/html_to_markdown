@@ -27,8 +27,10 @@ def getTrList(trs)
 end
 
 def getColumnWidthList(tr_list)
+  if tr_list.empty?
+    return nil
+  end
   col_size = tr_list.first.size
-  max_col_width = 44
 
   col_width_list = Array.new
   col_size.times {|col|
@@ -75,14 +77,19 @@ def parseTable(html)
   parse_result = html.gsub(/<table(.*?)>(.*?)<tbody>(.*?)<\/tbody>(.*?)<\/table>/m){|matched|
     table = matched # <tr><td>...</td></tr>...</tr>
     tr_list = getTrList(table)
-    col_width_list = getColumnWidthList(tr_list)
 
-    body = tr_list
+    if tr_list.empty?
+      table
+    else
+      col_width_list = getColumnWidthList(tr_list)
 
-    result = "\n\n" + makeTableHead(col_width_list)
-    result = result + "\n" + makeTableBody(tr_list, col_width_list) + "\n"
+      body = tr_list
 
-    result
+      result = "\n\n" + makeTableHead(col_width_list)
+      result = result + "\n" + makeTableBody(tr_list, col_width_list) + "\n"
+
+      result
+    end
   }
   return parse_result
 end
@@ -275,7 +282,7 @@ def convertLink(html, path)
                  './' + sub_hierarchy.join('/') # サイト内相対パス
                end
 
-	new_link = new_link + ".md"
+    new_link = new_link + ".md"
     "href='" + new_link + "'"
   }
 end
